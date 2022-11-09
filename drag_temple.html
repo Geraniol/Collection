@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- <link href="../Public/icon/Logo.svg" rel="icon" type="image/x-icon"> -->
+    <title>Drag</title>
+    <style>
+        *::-webkit-scrollbar {
+            display: none;
+        }
+
+        * {
+            scrollbar-width: none;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            margin: 0;
+            border: 0;
+            padding: 0;
+            transition: 0.2s;
+        }
+
+        #imgs {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            align-content: center;
+        }
+
+        #box {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            align-content: center;
+            margin: 10px;
+            padding: 10px;
+            min-width: 100px;
+            min-height: 100px;
+            border-radius: 10px;
+            background-color: #222222;
+        }
+
+        #box:active {
+            background-color: #ff8888;
+        }
+
+        img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin: 5px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box" name="t0" ondrop="drop(event)" ondragover="allowDrop(event)" onclick="copyGroup(event)"></div>
+    <div id="box" name="t1" ondrop="drop(event)" ondragover="allowDrop(event)" onclick="copyGroup(event)"></div>
+    <div id="box" name="t2" ondrop="drop(event)" ondragover="allowDrop(event)" onclick="copyGroup(event)"></div>
+    <div id="imgs">
+        <!-- Images -->
+    </div>
+</body>
+
+<script>
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+
+    function drag(ev) {
+        ev.dataTransfer.setData("id", ev.target.id);
+    }
+
+    function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("id");
+        if (ev.target.id == "box") {
+            ev.target.appendChild(document.getElementById(data));
+        }
+        else {
+            ev.target.parentNode.appendChild(document.getElementById(data));
+        }
+    }
+
+    function copyGroup(ev) {
+        var group = "";
+        if (ev.target.id == "box") {
+            var childs = ev.target.childNodes;
+        }
+        else {
+            var childs = ev.target.parentNode.childNodes;
+        }
+        for (var i = 0; i < childs.length; i++) {
+            group += childs[i].id + "\n";
+        }
+        navigator.clipboard.writeText(group);
+    }
+</script>
+
+</html>
