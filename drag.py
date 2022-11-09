@@ -1,6 +1,6 @@
 import sys
 import os
-with open(sys.path[0]+"/drag_temple.html", "rt")as f:
+with open(sys.path[0]+"/drag_sample.html", "rt")as f:
     content = f.read()
 new = ""
 
