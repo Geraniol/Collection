@@ -5,6 +5,7 @@
     <div id="g"></div>
 </body>
 <script>
+    DeviceOrientationEvent.requestPermission()
     window.addEventListener('deviceorientation', handleFunc, false);
     function handleFunc(evnet) {
         var abs = event.absolute;
