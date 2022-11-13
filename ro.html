@@ -37,9 +37,9 @@
         window.addEventListener('deviceorientation', handleFunc, false);
         function handleFunc(evnet) {
             var beta = event.beta;
-            document.getElementById("char").style.top = beta;
+            document.getElementById("char").style.top = beta + "px";
             var gamma = event.gamma;
-            document.getElementById("char").style.left = gamma;
+            document.getElementById("char").style.left = gamma + "px";
         }
     }
 </script>
