@@ -19,6 +19,7 @@
     #container {
       width: 100%;
       height: 100%;
+      transform: scale(0.8);
     }
   </style>
 </head>
@@ -2674,12 +2675,12 @@
     var scene = new THREE.Scene();
 
     var camera01 = new THREE.PerspectiveCamera(50, aspect, 0.1, 1000);
-    camera01.position.z = 500
+    camera01.position.z = 300
     camera01.position.x = -50
     camera01.lookAt({ x: 0, y: 0, z: 0 })
 
     var camera02 = new THREE.PerspectiveCamera(50, aspect, 0.1, 1000);
-    camera02.position.z = 500
+    camera02.position.z = 300
     camera02.position.x = 50
     camera02.lookAt({ x: 0, y: 0, z: 0 })
 
@@ -2727,7 +2728,7 @@
         );
 
       rand1 = Math.random() * 40 - 20;
-      rand2 = Math.random() * 40 - 20; rand3 = Math.random() * 12 - 6; asteroid.position.set(200 * Math.sin(p) + rand1, rand3, 200 * Math.cos(p) + rand2);
+      rand2 = Math.random() * 40 - 20; rand3 = Math.random() * 12 - 6; asteroid.position.set(150 * Math.sin(p) + rand1, rand3, 150 * Math.cos(p) + rand2);
 
       asteroid.geometry.computeFlatVertexNormals();
       asteroid0.add(asteroid);
@@ -2752,7 +2753,7 @@
         );
 
       rand1 = Math.random() * 40 - 20;
-      rand2 = Math.random() * 40 - 20; rand3 = Math.random() * 10 - 5; asteroid.position.set(230 * Math.sin(p) + rand1, rand3, 230 * Math.cos(p) + rand2);
+      rand2 = Math.random() * 40 - 20; rand3 = Math.random() * 10 - 5; asteroid.position.set(165 * Math.sin(p) + rand1, rand3, 1650 * Math.cos(p) + rand2);
 
       asteroid.geometry.computeFlatVertexNormals();
       asteroid1.add(asteroid);
@@ -2777,7 +2778,7 @@
         );
 
       rand1 = Math.random() * 40 - 20;
-      rand2 = Math.random() * 40 - 20; rand3 = Math.random() * 20 - 10; asteroid.position.set(260 * Math.sin(p) + rand1, rand3, 260 * Math.cos(p) + rand2);
+      rand2 = Math.random() * 40 - 20; rand3 = Math.random() * 20 - 10; asteroid.position.set(180 * Math.sin(p) + rand1, rand3, 180 * Math.cos(p) + rand2);
 
       asteroid.geometry.computeFlatVertexNormals();
       asteroid2.add(asteroid);
@@ -2808,7 +2809,7 @@
       asteroid3.add(asteroid);
     }
 
-    system.add(asteroid3);
+    // system.add(asteroid3);
 
 
 
@@ -2833,7 +2834,7 @@
       asteroid4.add(asteroid);
     }
 
-    system.add(asteroid4);
+    // system.add(asteroid4);
 
 
 
@@ -2898,8 +2899,8 @@
       asteroid0.rotation.y += 0.005;
       asteroid1.rotation.y += 0.004;
       asteroid2.rotation.y += 0.003;
-      asteroid3.rotation.y += 0.002;
-      asteroid4.rotation.y += 0.001;
+      // asteroid3.rotation.y += 0.002;
+      // asteroid4.rotation.y += 0.001;
 
       renderer01.render(scene, camera01);
       renderer02.render(scene, camera02);
