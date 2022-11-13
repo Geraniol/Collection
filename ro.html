@@ -13,7 +13,7 @@
         user-select: none;
         -moz-user-select: none;
         -webkit-user-select: none;
-        transition: 0.2s;
+        transition: linear 0.2s;
     }
 
     #char {
@@ -37,9 +37,9 @@
         window.addEventListener('deviceorientation', handleFunc, false);
         function handleFunc(evnet) {
             var beta = event.beta;
-            document.getElementById("char").style.top = beta + "px";
+            document.getElementById("char").style.top = beta / 18 + "%";
             var gamma = event.gamma;
-            document.getElementById("char").style.left = gamma + "px";
+            document.getElementById("char").style.left = gamma / 9 + "%";
         }
     }
 </script>
