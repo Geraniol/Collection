@@ -1,0 +1,16 @@
+<body>
+    <div id="a"></div>
+    <div id="b"></div>
+    <div id="g"></div>
+</body>
+<script>
+    window.addEventListener('deviceorientation', handleFunc, false);
+    function handleFunc(evnet) {
+        var alpha = event.alpha;
+        var beta = event.beta;
+        var gamma = event.gamma;
+        document.getElementById("a").innerText = alpha;
+        document.getElementById("b").innerText = beta;
+        document.getElementById("g").innerText = gamma;
+    }
+</script>
