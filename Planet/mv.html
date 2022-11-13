@@ -2914,6 +2914,7 @@
     }
     function handleFunc(evnet) {
       var alpha = event.alpha;
+      if (event.gamma < 0) { alpha += 180 }
       camera01.position.x = - Math.cos((alpha - 2.5) / 180 * Math.PI) * 300;
       camera01.position.z = Math.sin((alpha - 2.5) / 180 * Math.PI) * 300;
       camera01.lookAt({ x: 0, y: 0, z: 0 })
