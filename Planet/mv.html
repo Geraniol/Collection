@@ -2914,11 +2914,11 @@
     }
     function handleFunc(evnet) {
       var alpha = event.alpha;
-      camera01.position.x = - Math.cos((alpha - 1.5) * 2 / 180 * Math.PI) * 300;
-      camera01.position.z = Math.sin((alpha - 1.5) * 2 / 180 * Math.PI) * 300;
+      camera01.position.x = - Math.cos((alpha - 2.5) / 180 * Math.PI) * 300;
+      camera01.position.z = Math.sin((alpha - 2.5) / 180 * Math.PI) * 300;
       camera01.lookAt({ x: 0, y: 0, z: 0 })
-      camera02.position.x = - Math.cos((alpha + 1.5) * 2 / 180 * Math.PI) * 300;
-      camera02.position.z = Math.sin((alpha + 1.5) * 2 / 180 * Math.PI) * 300;
+      camera02.position.x = - Math.cos((alpha + 2.5) / 180 * Math.PI) * 300;
+      camera02.position.z = Math.sin((alpha + 2.5) / 180 * Math.PI) * 300;
       camera02.lookAt({ x: 0, y: 0, z: 0 })
     }
   </script>
