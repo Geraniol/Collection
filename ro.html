@@ -35,12 +35,15 @@
         }
         catch { }
         window.addEventListener('deviceorientation', handleFunc, false);
-        function handleFunc(evnet) {
-            var beta = event.beta;
-            document.getElementById("char").style.top = ((beta-90)/180)*50 + "%";
-            var gamma = event.gamma;
-            document.getElementById("char").style.left = (gamma/90)*50  + "%";
-        }
+    }
+    var flag = 0;
+    function handleFunc(evnet) {
+        var alpha = event.alpha;
+        document.getElementById("char").style.rotate = alpha + "deg";
+        var beta = event.beta;
+        document.getElementById("char").style.top = ((beta - 90) / 180) * 50 + "%";
+        var gamma = event.gamma;
+        document.getElementById("char").style.left = (gamma / 90) * 50 + "%";
     }
 </script>
 
