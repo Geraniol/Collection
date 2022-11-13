@@ -21,7 +21,7 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transform: scale(1.2);
+        transform: scale(2);
     }
 </style>
 
@@ -37,9 +37,9 @@
         window.addEventListener('deviceorientation', handleFunc, false);
         function handleFunc(evnet) {
             var beta = event.beta;
-            document.getElementById("char").style.top = beta / 18 + "%";
+            document.getElementById("char").style.top = ((beta-90)/180)*50 + "%";
             var gamma = event.gamma;
-            document.getElementById("char").style.left = gamma / 9 + "%";
+            document.getElementById("char").style.left = (gamma/90)*50  + "%";
         }
     }
 </script>
