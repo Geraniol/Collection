@@ -36,7 +36,6 @@
         catch { }
         window.addEventListener('deviceorientation', handleFunc, false);
     }
-    var flag = 0;
     function handleFunc(evnet) {
         var alpha = event.alpha;
         document.getElementById("char").style.rotate = alpha + "deg";
