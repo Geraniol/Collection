@@ -14,7 +14,10 @@
     body {
       width: 100%;
       height: 100%;
-      background: #000;
+    }
+
+    body {
+      background: #000000;
     }
 
     #container {
@@ -35,13 +38,14 @@
       border-radius: 10px;
       padding: 20px;
       transition: 0.5s;
+      text-align: center;
     }
   </style>
 </head>
 
 <body onclick="req()">
   <div id="container"></div>
-  <div id="alert">横屏 → 刷新 → 点击页面以授权 → 使用 VR 设备观看</div>
+  <div id="alert">横屏 → 刷新 → 点击页面以授权 → 使用 VR 设备观看<br>点击变换随机颜色</div>
   <script>
     // threejs.org/license
     (function (l, pa) { "object" === typeof exports && "undefined" !== typeof module ? pa(exports) : "function" === typeof define && define.amd ? define(["exports"], pa) : pa(l.THREE = l.THREE || {}) })(this, function (l) {
@@ -489,20 +493,22 @@
               if (2004 === a) return b.COMPRESSED_RGBA_S3TC_DXT5_EXT
             } if (2100 === a || 2101 === a || 2102 === a || 2103 === a) if (b = ja.get("WEBGL_compressed_texture_pvrtc"), null !== b) { if (2100 === a) return b.COMPRESSED_RGB_PVRTC_4BPPV1_IMG; if (2101 === a) return b.COMPRESSED_RGB_PVRTC_2BPPV1_IMG; if (2102 === a) return b.COMPRESSED_RGBA_PVRTC_4BPPV1_IMG; if (2103 === a) return b.COMPRESSED_RGBA_PVRTC_2BPPV1_IMG } if (2151 === a && (b = ja.get("WEBGL_compressed_texture_etc1"), null !== b)) return b.COMPRESSED_RGB_ETC1_WEBGL; if (103 === a || 104 === a) if (b = ja.get("EXT_blend_minmax"),
               null !== b) { if (103 === a) return b.MIN_EXT; if (104 === a) return b.MAX_EXT } return 1020 === a && (b = ja.get("WEBGL_depth_texture"), null !== b) ? b.UNSIGNED_INT_24_8_WEBGL : 0
-          } console.log("THREE.WebGLRenderer", "84"); a = a || {}; var y = void 0 !== a.canvas ? a.canvas : document.createElementNS("http://www.w3.org/1999/xhtml", "canvas"), K = void 0 !== a.context ? a.context : null, v = void 0 !== a.alpha ? a.alpha : !1, E = void 0 !== a.depth ? a.depth : !0, L = void 0 !== a.stencil ? a.stencil : !0, C = void 0 !== a.antialias ? a.antialias : !1, F = void 0 !== a.premultipliedAlpha ?
-            a.premultipliedAlpha : !0, x = void 0 !== a.preserveDrawingBuffer ? a.preserveDrawingBuffer : !1, H = [], aa = [], D = -1, z = [], T = -1, Q = new Float32Array(8), M = [], O = []; this.domElement = y; this.context = null; this.sortObjects = this.autoClearStencil = this.autoClearDepth = this.autoClearColor = this.autoClear = !0; this.clippingPlanes = []; this.localClippingEnabled = !1; this.gammaFactor = 2; this.physicallyCorrectLights = this.gammaOutput = this.gammaInput = !1; this.toneMappingWhitePoint = this.toneMappingExposure = this.toneMapping = 1; this.maxMorphTargets =
-              8; this.maxMorphNormals = 4; var P = this, wa = null, W = null, N = null, R = -1, V = "", U = null, X = new fa, Sa = null, Z = new fa, ea = 0, Ea = new J(0), gb = 0, md = y.width, Cc = y.height, Ra = 1, ga = new fa(0, 0, md, Cc), ka = !1, ia = new fa(0, 0, md, Cc), ma = new tc, ca = new Uf, oa = !1, ra = !1, na = new Na, ua = new S, Ga = new q, Ba = new S, xa = new S, ba = { hash: "", ambient: [0, 0, 0], directional: [], directionalShadowMap: [], directionalShadowMatrix: [], spot: [], spotShadowMap: [], spotShadowMatrix: [], rectArea: [], point: [], pointShadowMap: [], pointShadowMatrix: [], hemi: [], shadows: [] }, pa = {
-                calls: 0,
-                vertices: 0, faces: 0, points: 0
-              }; this.info = { render: pa, memory: { geometries: 0, textures: 0 }, programs: null }; var B; try {
-                v = { alpha: v, depth: E, stencil: L, antialias: C, premultipliedAlpha: F, preserveDrawingBuffer: x }; B = K || y.getContext("webgl", v) || y.getContext("experimental-webgl", v); if (null === B) { if (null !== y.getContext("webgl")) throw "Error creating WebGL context with your selected attributes."; throw "Error creating WebGL context."; } void 0 === B.getShaderPrecisionFormat && (B.getShaderPrecisionFormat = function () {
-                  return {
-                    rangeMin: 1,
-                    rangeMax: 1, precision: 1
-                  }
-                }); y.addEventListener("webglcontextlost", d, !1)
-              } catch (Vf) { console.error("THREE.WebGLRenderer: " + Vf) } var ja = new Tf(B); ja.get("WEBGL_depth_texture"); ja.get("OES_texture_float"); ja.get("OES_texture_float_linear"); ja.get("OES_texture_half_float"); ja.get("OES_texture_half_float_linear"); ja.get("OES_standard_derivatives"); ja.get("ANGLE_instanced_arrays"); ja.get("OES_element_index_uint") && (I.MaxIndex = 4294967296); var la = new Sf(B, ja, a), Y = new Rf(B, ja, w), ha = new Qf, ta = new Pf(B, ja, Y, ha, la,
-                w, this.info), qa = new Of(B, ha, this.info), ya = new Mf(this, la), za = new Ef; this.info.programs = ya.programs; var La = new Df(B, ja, pa), Oa = new Cf(B, ja, pa), Ia, Ca, sa, va; b(); this.context = B; this.capabilities = la; this.extensions = ja; this.properties = ha; this.state = Y; var Ma = new Ke(this, ba, qa, la); this.shadowMap = Ma; var Pa = new zf(this, M), Qa = new yf(this, O); this.getContext = function () { return B }; this.getContextAttributes = function () { return B.getContextAttributes() }; this.forceContextLoss = function () { ja.get("WEBGL_lose_context").loseContext() };
+          }
+        // console.log("THREE.WebGLRenderer", "84");
+        a = a || {}; var y = void 0 !== a.canvas ? a.canvas : document.createElementNS("http://www.w3.org/1999/xhtml", "canvas"), K = void 0 !== a.context ? a.context : null, v = void 0 !== a.alpha ? a.alpha : !1, E = void 0 !== a.depth ? a.depth : !0, L = void 0 !== a.stencil ? a.stencil : !0, C = void 0 !== a.antialias ? a.antialias : !1, F = void 0 !== a.premultipliedAlpha ?
+          a.premultipliedAlpha : !0, x = void 0 !== a.preserveDrawingBuffer ? a.preserveDrawingBuffer : !1, H = [], aa = [], D = -1, z = [], T = -1, Q = new Float32Array(8), M = [], O = []; this.domElement = y; this.context = null; this.sortObjects = this.autoClearStencil = this.autoClearDepth = this.autoClearColor = this.autoClear = !0; this.clippingPlanes = []; this.localClippingEnabled = !1; this.gammaFactor = 2; this.physicallyCorrectLights = this.gammaOutput = this.gammaInput = !1; this.toneMappingWhitePoint = this.toneMappingExposure = this.toneMapping = 1; this.maxMorphTargets =
+            8; this.maxMorphNormals = 4; var P = this, wa = null, W = null, N = null, R = -1, V = "", U = null, X = new fa, Sa = null, Z = new fa, ea = 0, Ea = new J(0), gb = 0, md = y.width, Cc = y.height, Ra = 1, ga = new fa(0, 0, md, Cc), ka = !1, ia = new fa(0, 0, md, Cc), ma = new tc, ca = new Uf, oa = !1, ra = !1, na = new Na, ua = new S, Ga = new q, Ba = new S, xa = new S, ba = { hash: "", ambient: [0, 0, 0], directional: [], directionalShadowMap: [], directionalShadowMatrix: [], spot: [], spotShadowMap: [], spotShadowMatrix: [], rectArea: [], point: [], pointShadowMap: [], pointShadowMatrix: [], hemi: [], shadows: [] }, pa = {
+              calls: 0,
+              vertices: 0, faces: 0, points: 0
+            }; this.info = { render: pa, memory: { geometries: 0, textures: 0 }, programs: null }; var B; try {
+              v = { alpha: v, depth: E, stencil: L, antialias: C, premultipliedAlpha: F, preserveDrawingBuffer: x }; B = K || y.getContext("webgl", v) || y.getContext("experimental-webgl", v); if (null === B) { if (null !== y.getContext("webgl")) throw "Error creating WebGL context with your selected attributes."; throw "Error creating WebGL context."; } void 0 === B.getShaderPrecisionFormat && (B.getShaderPrecisionFormat = function () {
+                return {
+                  rangeMin: 1,
+                  rangeMax: 1, precision: 1
+                }
+              }); y.addEventListener("webglcontextlost", d, !1)
+            } catch (Vf) { console.error("THREE.WebGLRenderer: " + Vf) } var ja = new Tf(B); ja.get("WEBGL_depth_texture"); ja.get("OES_texture_float"); ja.get("OES_texture_float_linear"); ja.get("OES_texture_half_float"); ja.get("OES_texture_half_float_linear"); ja.get("OES_standard_derivatives"); ja.get("ANGLE_instanced_arrays"); ja.get("OES_element_index_uint") && (I.MaxIndex = 4294967296); var la = new Sf(B, ja, a), Y = new Rf(B, ja, w), ha = new Qf, ta = new Pf(B, ja, Y, ha, la,
+              w, this.info), qa = new Of(B, ha, this.info), ya = new Mf(this, la), za = new Ef; this.info.programs = ya.programs; var La = new Df(B, ja, pa), Oa = new Cf(B, ja, pa), Ia, Ca, sa, va; b(); this.context = B; this.capabilities = la; this.extensions = ja; this.properties = ha; this.state = Y; var Ma = new Ke(this, ba, qa, la); this.shadowMap = Ma; var Pa = new zf(this, M), Qa = new yf(this, O); this.getContext = function () { return B }; this.getContextAttributes = function () { return B.getContextAttributes() }; this.forceContextLoss = function () { ja.get("WEBGL_lose_context").loseContext() };
         this.getMaxAnisotropy = function () { return la.getMaxAnisotropy() }; this.getPrecision = function () { return la.precision }; this.getPixelRatio = function () { return Ra }; this.setPixelRatio = function (a) { void 0 !== a && (Ra = a, this.setSize(ia.z, ia.w, !1)) }; this.getSize = function () { return { width: md, height: Cc } }; this.setSize = function (a, b, c) { md = a; Cc = b; y.width = a * Ra; y.height = b * Ra; !1 !== c && (y.style.width = a + "px", y.style.height = b + "px"); this.setViewport(0, 0, a, b) }; this.setViewport = function (a, b, c, d) { Y.viewport(ia.set(a, b, c, d)) }; this.setScissor =
           function (a, b, c, d) { Y.scissor(ga.set(a, b, c, d)) }; this.setScissorTest = function (a) { Y.setScissorTest(ka = a) }; this.getClearColor = function () { return Ea }; this.setClearColor = function (a, b) { Ea.set(a); gb = void 0 !== b ? b : 1; Y.buffers.color.setClear(Ea.r, Ea.g, Ea.b, gb, F) }; this.getClearAlpha = function () { return gb }; this.setClearAlpha = function (a) { gb = a; Y.buffers.color.setClear(Ea.r, Ea.g, Ea.b, gb, F) }; this.clear = function (a, b, c) {
             var d = 0; if (void 0 === a || a) d |= B.COLOR_BUFFER_BIT; if (void 0 === b || b) d |= B.DEPTH_BUFFER_BIT; if (void 0 === c ||
@@ -2677,6 +2683,11 @@
     });
   </script>
   <script>
+    function randomColor() {
+      return Math.floor(Math.random() * 0xffffff);
+    }
+  </script>
+  <script>
     var container = document.getElementById("container");
     var width = container.clientWidth;
     var height = container.clientHeight;
@@ -2699,7 +2710,7 @@
     system = new THREE.Group(); system
 
     scene.add(
-      new THREE.AmbientLight(0x444444, 0.2)
+      new THREE.AmbientLight(0x181818, 0.2)
     );
 
     var light = new THREE.DirectionalLight(0xf8f8f8, 2.5);
@@ -2835,12 +2846,87 @@
   </script>
   <script>
     var flag = 1;
+    var r = 300;
+    var pd = 0.8;
+    // function getIos() {
+    //   let u = window.navigator.userAgent;
+    //   return !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+    // }
+    function handleR(evnet) {
+      var alpha = event.alpha;
+      var gamma = 90 - Math.abs(event.gamma);
+      if (Math.abs(event.gamma) < 45) {
+        if (event.gamma < 0 && r < 500) {
+          r += 3;
+          pd += 0.015;
+        }
+        else if (event.gamma > 0 && r > 180) {
+          r -= 3;
+          pd -= 0.015;
+        }
+      }
+      else if (Math.abs(event.gamma) < 60) {
+        if (event.gamma < 0 && r < 600) {
+          r += 1;
+          pd += 0.005;
+        }
+        else if (event.gamma > 0 && r > 180) {
+          r -= 1;
+          pd -= 0.005;
+        }
+      }
+      if (event.gamma < 0) { gamma = 0 - gamma }
+      if (event.gamma < 0) { alpha += 180 }
+      nr = Math.cos(gamma / 180 * Math.PI) * r;
+      camera01.position.y = Math.sin(gamma / 180 * Math.PI) * r;
+      camera02.position.y = Math.sin(gamma / 180 * Math.PI) * r;
+      camera01.position.x = - Math.cos((alpha - pd) / 180 * Math.PI) * nr;
+      camera02.position.x = - Math.cos((alpha + pd) / 180 * Math.PI) * nr;
+      camera01.position.z = Math.sin((alpha - pd) / 180 * Math.PI) * nr;
+      camera02.position.z = Math.sin((alpha + pd) / 180 * Math.PI) * nr;
+      camera01.lookAt({ x: 0, y: 0, z: 0 })
+      camera02.lookAt({ x: 0, y: 0, z: 0 })
+      // document.getElementById("alert").style.display = "block";
+      // document.getElementById("alert").style.opacity = 1;
+      // document.getElementById("alert").innerText = pd;
+    }
+    // function handleM(event) { }
     function req() {
       try {
-        DeviceOrientationEvent.requestPermission();
+        DeviceOrientationEvent.requestPermission().then(state => {
+          if (state === "granted") { }
+          else if (state === "denied") {
+            setTimeout(function () {
+              document.getElementById("alert").style.display = "block";
+              setTimeout(function () {
+                document.getElementById("alert").style.opacity = 1;
+              }, 200);
+              document.getElementById("alert").innerText = "未获得陀螺仪授权";
+            }, 800);
+          }
+          else if (state === "prompt") {
+            setTimeout(function () {
+              document.getElementById("alert").style.display = "block";
+              setTimeout(function () {
+                document.getElementById("alert").style.opacity = 1;
+              }, 200);
+              document.getElementById("alert").innerText = "陀螺仪授权错误";
+            }, 800);
+          }
+        });
       }
       catch { }
-      window.addEventListener('deviceorientation', handleFunc, false);
+      if (!window.DeviceOrientationEvent) {
+        setTimeout(function () {
+          document.getElementById("alert").style.display = "block";
+          setTimeout(function () {
+            document.getElementById("alert").style.opacity = 1;
+          }, 200);
+          document.getElementById("alert").innerText = "设备不支持陀螺仪";
+        }, 800);
+      }
+      window.addEventListener('deviceorientation', handleR, false);
+      // window.addEventListener('devicemotion', handleM, false);
 
       if (flag == 1) {
         document.getElementById("alert").style.opacity = 0;
@@ -2848,20 +2934,9 @@
         render();
         flag = 0;
       }
-    }
-    function handleFunc(evnet) {
-      var alpha = event.alpha;
-      var gamma = 90 - Math.abs(event.gamma);
-      if (event.gamma < 0) { gamma = 0 - gamma }
-      if (event.gamma < 0) { alpha += 180 }
-      camera01.position.y = Math.tan(gamma / 180 * Math.PI) * 300;
-      camera02.position.y = Math.tan(gamma / 180 * Math.PI) * 300;
-      camera01.position.x = - Math.cos((alpha - 2) / 180 * Math.PI) * 300;
-      camera01.position.z = Math.sin((alpha - 2) / 180 * Math.PI) * 300;
-      camera01.lookAt({ x: 0, y: 0, z: 0 })
-      camera02.position.x = - Math.cos((alpha + 2) / 180 * Math.PI) * 300;
-      camera02.position.z = Math.sin((alpha + 2) / 180 * Math.PI) * 300;
-      camera02.lookAt({ x: 0, y: 0, z: 0 })
+      else {
+        material.color.set(randomColor());
+      }
     }
   </script>
 </body>
