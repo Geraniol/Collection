@@ -23,7 +23,7 @@
     #container {
       width: 100%;
       height: 100%;
-      transform: scale(0.8);
+      transform: scale(0.85);
     }
 
     #alert {
@@ -39,6 +39,10 @@
       padding: 20px;
       transition: 0.5s;
       text-align: center;
+    }
+
+    canvas {
+      transform: scale(0.98);
     }
   </style>
 </head>
@@ -2688,26 +2692,21 @@
     }
   </script>
   <script>
+    var width = 0;
+    var height = 0;
+    var aspect = 1;
     var container = document.getElementById("container");
-    var width = container.clientWidth;
-    var height = container.clientHeight;
-    var aspect = width / 2 / height;
     var renderer01 = new THREE.WebGLRenderer();
-    renderer01.setSize(width / 2, height);
     var renderer02 = new THREE.WebGLRenderer();
-    renderer02.setSize(width / 2, height);
     container.appendChild(renderer01.domElement);
     container.appendChild(renderer02.domElement);
 
     var scene = new THREE.Scene();
 
-    var camera01 = new THREE.PerspectiveCamera(50, aspect, 0.1, 1000);
-    camera01.lookAt({ x: 0, y: 0, z: 0 })
+    var camera01 = 0;
+    var camera02 = 0;
 
-    var camera02 = new THREE.PerspectiveCamera(50, aspect, 0.1, 1000);
-    camera02.lookAt({ x: 0, y: 0, z: 0 })
-
-    system = new THREE.Group(); system
+    system = new THREE.Group();
 
     scene.add(
       new THREE.AmbientLight(0x181818, 0.2)
@@ -2865,47 +2864,39 @@
       if ((Math.abs(event.beta) >= 90 && event.gamma >= 0) || (Math.abs(event.beta) < 90 && event.gamma < 0)) { roll = -roll }
 
       if (roll > 0) {
-        if (Math.abs(event.gamma) < 45) {
-          if (event.gamma < 0 && r < max) {
-            r += 3;
-            pd += 0.015;
-          }
-          else if (event.gamma > 0 && r > min) {
-            r -= 3;
-            pd -= 0.015;
-          }
+        if (0 < event.gamma && event.gamma < 30 && r > min) {
+          r -= 3;
+          pd -= 0.015;
         }
-        else if (Math.abs(event.gamma) < 60) {
-          if (event.gamma < 0 && r < max) {
-            r += 1;
-            pd += 0.005;
-          }
-          else if (event.gamma > 0 && r > min) {
-            r -= 1;
-            pd -= 0.005;
-          }
+        else if (0 > event.gamma && event.gamma > -45 && r < max) {
+          r += 3;
+          pd += 0.015;
+        }
+        else if (0 < event.gamma && event.gamma < 45 && r > min) {
+          r -= 1;
+          pd -= 0.005;
+        }
+        else if (0 > event.gamma && event.gamma > -60 && r < max) {
+          r += 1;
+          pd += 0.005;
         }
       }
       else {
-        if (Math.abs(event.gamma) < 45) {
-          if (event.gamma < 0 && r > min) {
-            r -= 3;
-            pd -= 0.015;
-          }
-          else if (event.gamma > 0 && r < max) {
-            r += 3;
-            pd += 0.015;
-          }
+        if (0 < event.gamma && event.gamma < 45 && r < max) {
+          r += 3;
+          pd += 0.015;
         }
-        else if (Math.abs(event.gamma) < 60) {
-          if (event.gamma < 0 && r > min) {
-            r -= 1;
-            pd -= 0.005;
-          }
-          else if (event.gamma > 0 && r < max) {
-            r += 1;
-            pd += 0.005;
-          }
+        else if (0 > event.gamma && event.gamma > -30 && r > min) {
+          r -= 3;
+          pd -= 0.015;
+        }
+        else if (0 < event.gamma && event.gamma < 60 && r < max) {
+          r += 1;
+          pd += 0.005;
+        }
+        else if (0 > event.gamma && event.gamma > -45 && r > min) {
+          r -= 1;
+          pd -= 0.005;
         }
       }
 
@@ -2921,12 +2912,22 @@
       camera02.position.z = Math.sin((alpha + pd) / 180 * Math.PI) * nr;
       camera01.lookAt({ x: 0, y: 0, z: 0 })
       camera02.lookAt({ x: 0, y: 0, z: 0 })
-      // document.getElementById("alert").style.display = "block";
-      // document.getElementById("alert").style.opacity = 1;
-      // document.getElementById("alert").innerText = roll;
+      document.getElementById("alert").style.display = "block";
+      document.getElementById("alert").style.opacity = 1;
+      document.getElementById("alert").innerText = event.gamma;
     }
     // function handleM(event) { }
     function req() {
+      width = container.clientWidth;
+      height = container.clientHeight;
+      aspect = width / 2 / height;
+      renderer01.setSize(width / 2, height);
+      renderer02.setSize(width / 2, height);
+      camera01 = new THREE.PerspectiveCamera(50, aspect, 0.1, 1000);
+      camera01.lookAt({ x: 0, y: 0, z: 0 })
+
+      camera02 = new THREE.PerspectiveCamera(50, aspect, 0.1, 1000);
+      camera02.lookAt({ x: 0, y: 0, z: 0 })
       try {
         DeviceOrientationEvent.requestPermission().then(state => {
           if (state === "granted") { }
