@@ -31,11 +31,12 @@
       position: fixed;
       left: 50%;
       top: 50%;
+      width: 70%;
       transform: translate(-50%, -50%);
       color: #ffffff;
       z-index: 5;
-      background-color: #242424;
-      border-radius: 10px;
+      background-color: #181818;
+      border-radius: 30px;
       padding: 20px;
       transition: 0.5s;
       text-align: center;
@@ -49,7 +50,7 @@
 
 <body onclick="req()">
   <div id="container"></div>
-  <div id="alert">横屏 → 刷新 → 点击页面以授权 → 使用 VR 设备观看<br>俯仰超过 45 度调节视角<br>点击变换随机颜色</div>
+  <div id="alert">横屏 → 全屏 → 刷新 → 点击以授权 → 使用 VR 设备观看<br>俯仰超过 45 度调节视角<br>点击变换随机颜色</div>
   <script>
     // threejs.org/license
     (function (l, pa) { "object" === typeof exports && "undefined" !== typeof module ? pa(exports) : "function" === typeof define && define.amd ? define(["exports"], pa) : pa(l.THREE = l.THREE || {}) })(this, function (l) {
@@ -2845,7 +2846,7 @@
   </script>
   <script>
     var flag = 1;
-    var r = 300;
+    var r = 360;
     var pd = 0.8;
     // function getIos() {
     //   let u = window.navigator.userAgent;
@@ -2854,6 +2855,9 @@
 
     var max = 500;
     var min = 180;
+
+    var dir = 0;
+    var f = 1;
 
     function handleR(evnet) {
       var alpha = event.alpha;
@@ -2899,22 +2903,21 @@
           pd -= 0.005;
         }
       }
-
+      if (roll > 0 && f == 1) { dir = 180; f = 0; }
       if ((event.gamma < 0 && roll >= 0) || (event.gamma >= 0 && roll < 0)) { gamma = 0 - gamma }
       if (event.gamma < 0) { alpha += 180 }
-      // if (roll > 0) { beta = - beta }
       nr = Math.cos(gamma / 180 * Math.PI) * r;
       camera01.position.y = Math.sin(gamma / 180 * Math.PI) * r;
       camera02.position.y = Math.sin(gamma / 180 * Math.PI) * r;
-      camera01.position.x = - Math.cos((alpha - pd) / 180 * Math.PI) * nr;
-      camera02.position.x = - Math.cos((alpha + pd) / 180 * Math.PI) * nr;
-      camera01.position.z = Math.sin((alpha - pd) / 180 * Math.PI) * nr;
-      camera02.position.z = Math.sin((alpha + pd) / 180 * Math.PI) * nr;
+      camera01.position.x = - Math.cos((alpha + dir - pd) / 180 * Math.PI) * nr;
+      camera02.position.x = - Math.cos((alpha + dir + pd) / 180 * Math.PI) * nr;
+      camera01.position.z = Math.sin((alpha + dir - pd) / 180 * Math.PI) * nr;
+      camera02.position.z = Math.sin((alpha + dir + pd) / 180 * Math.PI) * nr;
       camera01.lookAt({ x: 0, y: 0, z: 0 })
       camera02.lookAt({ x: 0, y: 0, z: 0 })
-      document.getElementById("alert").style.display = "block";
-      document.getElementById("alert").style.opacity = 1;
-      document.getElementById("alert").innerText = event.gamma;
+      // document.getElementById("alert").style.display = "block";
+      // document.getElementById("alert").style.opacity = 1;
+      // document.getElementById("alert").innerText = roll;
     }
     // function handleM(event) { }
     function req() {
@@ -2925,7 +2928,6 @@
       renderer02.setSize(width / 2, height);
       camera01 = new THREE.PerspectiveCamera(50, aspect, 0.1, 1000);
       camera01.lookAt({ x: 0, y: 0, z: 0 })
-
       camera02 = new THREE.PerspectiveCamera(50, aspect, 0.1, 1000);
       camera02.lookAt({ x: 0, y: 0, z: 0 })
       try {
@@ -2963,7 +2965,6 @@
       }
       window.addEventListener('deviceorientation', handleR, false);
       // window.addEventListener('devicemotion', handleM, false);
-
       if (flag == 1) {
         document.getElementById("alert").style.opacity = 0;
         setTimeout(function () { document.getElementById("alert").style.display = "None"; }, 700);
