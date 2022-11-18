@@ -2736,8 +2736,8 @@
 
 
 
-    var randmult = 10;
-    var randrange = randmult / 2;
+    var randmult = 15;
+    var randh = 5;
 
 
 
@@ -2755,9 +2755,9 @@
           Math.random() * 0.2 + size
         );
 
-      rand1 = Math.random() * randmult - randrange;
-      rand2 = Math.random() * randmult - randrange;
-      rand3 = Math.random() * 12 - 6;
+      rand1 = Math.random() * randmult - randmult / 2;
+      rand2 = Math.random() * randmult - randmult / 2;
+      rand3 = Math.random() * randh - randh / 2;
       asteroid.position.set(150 * Math.sin(p) + rand1, rand3, 150 * Math.cos(p) + rand2);
 
       asteroid.geometry.computeFlatVertexNormals();
@@ -2782,9 +2782,9 @@
           Math.random() * 0.2 + size
         );
 
-      rand1 = Math.random() * randmult - randrange;
-      rand2 = Math.random() * randmult - randrange;
-      rand3 = Math.random() * 10 - 5;
+      rand1 = Math.random() * randmult - randmult / 2;
+      rand2 = Math.random() * randmult - randmult / 2;
+      rand3 = Math.random() * randh - randh / 2;
       asteroid.position.set(165 * Math.sin(p) + rand1, rand3, 165 * Math.cos(p) + rand2);
 
       asteroid.geometry.computeFlatVertexNormals();
@@ -2809,9 +2809,9 @@
           Math.random() * 0.2 + size
         );
 
-      rand1 = Math.random() * randmult - randrange;
-      rand2 = Math.random() * randmult - randrange;
-      rand3 = Math.random() * 20 - 10;
+      rand1 = Math.random() * randmult - randmult / 2;
+      rand2 = Math.random() * randmult - randmult / 2;
+      rand3 = Math.random() * randh - randh / 2;
       asteroid.position.set(180 * Math.sin(p) + rand1, rand3, 180 * Math.cos(p) + rand2);
 
       asteroid.geometry.computeFlatVertexNormals();
@@ -2823,7 +2823,7 @@
 
     system.rotation.x = 0;
     system.rotation.y = 0;
-    system.rotation.z = -0.3;
+    system.rotation.z = -0.15;
 
     scene.add(system);
 
@@ -2836,9 +2836,9 @@
 
 
 
-      asteroid0.rotation.y += 0.004;
-      asteroid1.rotation.y += 0.003;
-      asteroid2.rotation.y += 0.002;
+      asteroid0.rotation.y += 0.003;
+      asteroid1.rotation.y += 0.002;
+      asteroid2.rotation.y += 0.001;
 
       renderer01.render(scene, camera01);
       renderer02.render(scene, camera02);
@@ -2852,31 +2852,66 @@
     //   let u = window.navigator.userAgent;
     //   return !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
     // }
+
+    var max = 500;
+    var min = 180;
+
     function handleR(evnet) {
       var alpha = event.alpha;
       var gamma = 90 - Math.abs(event.gamma);
-      if (Math.abs(event.gamma) < 45) {
-        if (event.gamma < 0 && r < 500) {
-          r += 3;
-          pd += 0.015;
+
+      var temp = Math.sqrt(Math.pow(Math.sin(event.beta / 180 * Math.PI), 2) + Math.pow(Math.tan(event.gamma / 180 * Math.PI), 2));
+      var roll = Math.acos(Math.sin(event.beta / 180 * Math.PI) / (Math.cos(event.gamma / 180 * Math.PI) * temp));
+      if ((Math.abs(event.beta) >= 90 && event.gamma >= 0) || (Math.abs(event.beta) < 90 && event.gamma < 0)) { roll = -roll }
+
+      if (roll > 0) {
+        if (Math.abs(event.gamma) < 45) {
+          if (event.gamma < 0 && r < max) {
+            r += 3;
+            pd += 0.015;
+          }
+          else if (event.gamma > 0 && r > min) {
+            r -= 3;
+            pd -= 0.015;
+          }
         }
-        else if (event.gamma > 0 && r > 180) {
-          r -= 3;
-          pd -= 0.015;
+        else if (Math.abs(event.gamma) < 60) {
+          if (event.gamma < 0 && r < max) {
+            r += 1;
+            pd += 0.005;
+          }
+          else if (event.gamma > 0 && r > min) {
+            r -= 1;
+            pd -= 0.005;
+          }
         }
       }
-      else if (Math.abs(event.gamma) < 60) {
-        if (event.gamma < 0 && r < 600) {
-          r += 1;
-          pd += 0.005;
+      else {
+        if (Math.abs(event.gamma) < 45) {
+          if (event.gamma < 0 && r > min) {
+            r -= 3;
+            pd -= 0.015;
+          }
+          else if (event.gamma > 0 && r < max) {
+            r += 3;
+            pd += 0.015;
+          }
         }
-        else if (event.gamma > 0 && r > 180) {
-          r -= 1;
-          pd -= 0.005;
+        else if (Math.abs(event.gamma) < 60) {
+          if (event.gamma < 0 && r > min) {
+            r -= 1;
+            pd -= 0.005;
+          }
+          else if (event.gamma > 0 && r < max) {
+            r += 1;
+            pd += 0.005;
+          }
         }
       }
-      if (event.gamma < 0) { gamma = 0 - gamma }
+
+      if ((event.gamma < 0 && roll >= 0) || (event.gamma >= 0 && roll < 0)) { gamma = 0 - gamma }
       if (event.gamma < 0) { alpha += 180 }
+      // if (roll > 0) { beta = - beta }
       nr = Math.cos(gamma / 180 * Math.PI) * r;
       camera01.position.y = Math.sin(gamma / 180 * Math.PI) * r;
       camera02.position.y = Math.sin(gamma / 180 * Math.PI) * r;
@@ -2886,9 +2921,9 @@
       camera02.position.z = Math.sin((alpha + pd) / 180 * Math.PI) * nr;
       camera01.lookAt({ x: 0, y: 0, z: 0 })
       camera02.lookAt({ x: 0, y: 0, z: 0 })
-      // document.getElementById("alert").style.display = "block";
-      // document.getElementById("alert").style.opacity = 1;
-      // document.getElementById("alert").innerText = pd;
+      document.getElementById("alert").style.display = "block";
+      document.getElementById("alert").style.opacity = 1;
+      document.getElementById("alert").innerText = roll;
     }
     // function handleM(event) { }
     function req() {
